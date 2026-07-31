@@ -130,9 +130,13 @@ confirmed the unique-constraint dedupe kicked in (`deduped: true`, same
 `runId`, no reprocessing). Confirmed a tampered signature and a stale
 timestamp both return `401`, and a payload missing a required field
 returns `400` with a specific error. Confirmed the failure path itself
-works, not just the happy path: with no Slack webhook configured, the run
+works, not just the happy path: with no Slack webhook configured, a run
 correctly lands in `status: "failed"` with `error.stage: "forwarding"`
-recorded, instead of silently hanging.
+recorded, instead of silently hanging. Once a real Slack Incoming Webhook
+was wired up, confirmed the full happy path too: a real ticket produced a
+real Gemini classification (`urgency: "high"`, `category: "account"`,
+`sentiment: "negative"`) and a real message landed in the Slack channel,
+with the run correctly reaching `status: "completed"`.
 
 ## What I'd do next / limitations
 
